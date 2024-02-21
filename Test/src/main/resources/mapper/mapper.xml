@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="empMapper">
+    <resultMap id="emp" type="com.example.Test.vo.EmpVO">
+        <result column="EMPNO" property="empno"/>
+        <result column="ENAME" property="ename"/>
+        <result column="SAL" property="sal"/>
+    </resultMap>
+
+    <select id="selectEmpList" resultMap="emp">
+        SELECT EMPNO, ENAME, SAL FROM EMP
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

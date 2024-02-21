@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{fragment/layout}">
+
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <h3>list 파일</h3>
+    <a href="/detail">Detail 파일로 이동~</a>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/"></script>
+</th:block>
+
+
+
+
+
+</html>

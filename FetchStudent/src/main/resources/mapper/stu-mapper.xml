@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="stuMapper">
+    <resultMap id="cls" type="com.example.FetchStudent.vo.ClassVO">
+        <id     column="CLASS_CODE" property="classCode"/>
+        <result column="CLASS_NAME" property="className"/>
+    </resultMap>
+
+    <resultMap id="student" type="com.example.FetchStudent.vo.StuVO">
+        <id     column="STU_NUM"    property="stuNum"/>
+        <result column="STU_NAME"   property="stuName"/>
+        <result column="CLASS_CODE" property="classCode"/>
+        <result column="CLASS_NAME" property="className"/>
+    </resultMap>
+
+    <resultMap id="score" type="com.example.FetchStudent.vo.ScoreVO">
+        <id     column="SCORE_NUM"      property="scoreNum"/>
+        <result column="KOR_SCORE"      property="korScore"/>
+        <result column="ENG_SCORE"      property="engScore"/>
+        <result column="MATH_SCORE"     property="mathScore"/>
+        <result column="STU_NUM"        property="stuNum"/>
+    </resultMap>
+
+    <!--학생 목록 조회(반이름, 학번, 학생명)-->
+    <select id="selectStuList" resultMap="student">
+        SELECT STU_NUM
+        , STU_NAME
+        , CLASS_NAME
+        FROM STUDENT_INFO S INNER JOIN CLASS_INFO C
+        ON S.CLASS_CODE = C.CLASS_CODE
+        <if test="classCode != 0">
+            WHERE S.CLASS_CODE = #{classCode}
+        </if>
+        ORDER BY C.CLASS_CODE, STU_NUM
+    </select>
+
+    <!--학급 목록 조회-->
+    <select id="selectClassList" resultMap="cls">
+        SELECT CLASS_CODE
+            , CLASS_NAME
+        FROM CLASS_INFO
+        ORDER BY ClASS_CODE ASC
+    </select>
+
+    <!--학번, 소속반, 학생명 - 상세 조회 -->
+    <select id="selectStuDetail" resultMap="student">
+        SELECT STU_NUM
+            , CLASS_NAME
+            , STU_NAME
+        FROM STUDENT_INFO S INNER JOIN CLASS_INFO C
+        ON S.CLASS_CODE = C.CLASS_CODE
+        WHERE STU_NUM = #{stuNum}
+    </select>
+
+    <select id="selectScoreInfo" resultMap="score">
+        SELECT KOR_SCORE
+            , ENG_SCORE
+            , MATH_SCORE
+        FROM stu_score
+        WHERE STU_NUM = #{stuNum}
+    </select>
+
+    <insert id="insertScore">
+        INSERT INTO STU_SCORE (
+            KOR_SCORE
+            , ENG_SCORE
+            , MATH_SCORE
+            , STU_NUM
+        ) VALUES (
+            #{korScore}
+            , #{engScore}
+            , #{mathScore}
+            , #{stuNum}
+        )
+    </insert>
+
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
